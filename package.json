@@ -4,10 +4,11 @@
   "description": "Utilities for working with @mdn/browser-compat-data.",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha 'src/**.test.js'"
   },
   "devDependencies": {
     "eslint": "^7.20.0",
+    "mocha": "^8.3.0",
     "prettier": "^2.2.1"
   }
 }
