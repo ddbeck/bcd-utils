@@ -1,5 +1,6 @@
 const assert = require("assert");
 
+const bcd = require("./bcd");
 const { walk } = require("./index");
 
 describe("walk", function () {
@@ -20,5 +21,14 @@ describe("walk", function () {
       results[results.length - 1].path,
       "css.properties.color"
     );
+  });
+
+  it("should emit every feature", function () {
+    const featureCountFromString = JSON.stringify(bcd, undefined, 2)
+      .split("\n")
+      .filter((line) => line.includes("__compat")).length;
+    const featureCountFromWalk = Array.from(walk()).length;
+
+    assert.strictEqual(featureCountFromString, featureCountFromWalk);
   });
 });

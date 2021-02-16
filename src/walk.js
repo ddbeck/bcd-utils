@@ -1,17 +1,7 @@
 const bcd = require("./bcd");
 const query = require("./query");
 
-const walkableBcdKeys = [
-  "api",
-  "css",
-  "html",
-  "http",
-  "javascript",
-  "mathml",
-  "webextensions",
-  "xpath",
-  "xslt",
-];
+const walkableBcdKeys = [...Object.keys(bcd).filter((k) => k !== "browsers")];
 
 function* walk(startingPoints = walkableBcdKeys, data = bcd) {
   // Convert string to array of strings
