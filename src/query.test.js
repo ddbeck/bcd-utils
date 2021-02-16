@@ -1,6 +1,6 @@
 const assert = require("assert");
 
-const { query } = require("./index");
+const query = require("./query");
 
 describe("query", function () {
   describe("non-existent feature", function () {
