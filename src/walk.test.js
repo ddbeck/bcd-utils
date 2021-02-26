@@ -23,7 +23,7 @@ describe("walk", function () {
     );
   });
 
-  it("should emit every feature", function () {
+  it("should yield every feature by default", function () {
     const featureCountFromString = JSON.stringify(bcd, undefined, 2)
       .split("\n")
       .filter((line) => line.includes("__compat")).length;
