@@ -1,5 +1,13 @@
 const bcd = require("./bcd");
 
+/**
+ * Get a subtree of compat data.
+ *
+ * @param {string} path Dotted path to a given feature (e.g., `css.properties.background`)
+ * @param {*} [data=bcd] A tree to query. All of BCD, by default.
+ * @returns {*} A BCD subtree
+ * @throws {ReferenceError} For invalid identifiers
+ */
 function query(path, data = bcd) {
   const pathElements = path.split(".");
   let lookup = data;
