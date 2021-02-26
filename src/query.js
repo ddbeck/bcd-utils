@@ -8,7 +8,7 @@ function query(path, data = bcd) {
     lookup = lookup[next];
     if (lookup === undefined) {
       throw ReferenceError(
-        `${path} is not a valid feature identifier (failed at '${next}')`
+        `${path} is not a valid tree identifier (failed at '${next}')`
       );
     }
   }
