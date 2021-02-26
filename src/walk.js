@@ -49,7 +49,8 @@ function* lowLevelWalk(data = bcd, path, depth = Infinity) {
 }
 
 /**
- * Walk the tree of compat features from one or more starting points. Yields the path to each feature and the inner compat object.
+ * Walk the tree of compat features from one or more starting points. Yields the
+ * path to each feature and the inner compat object.
  *
  * @param {string[]} [entryPoints] One or more dotted paths to traverse the tree from.
  * @yields {{path: string, compat: Object}} A path and `__compat` object
