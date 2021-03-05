@@ -2,8 +2,42 @@ const assert = require("assert");
 
 const bcd = require("./bcd");
 const { walk } = require("./index");
+const { lowLevelWalk } = require("./walk");
 
-describe("walk", function () {
+describe("lowLevelWalk()", function () {
+  it("visits every top-level tree", function () {
+    const expectedPaths = [
+      "api",
+      "browsers",
+      "css",
+      "html",
+      "http",
+      "javascript",
+      "mathml",
+      "svg",
+      "webdriver",
+      "webextensions",
+      "xpath",
+      "xslt",
+    ];
+
+    const steps = Array.from(lowLevelWalk(undefined, undefined, 1));
+    const paths = steps.map((step) => step.path);
+    assert.strictEqual(steps.length, expectedPaths.length);
+    assert.deepStrictEqual(paths, expectedPaths);
+  });
+  it("visits every point in the tree", function () {
+    const paths = Array.from(lowLevelWalk()).map((step) => step.path);
+    assert.ok(paths.length > 13000);
+  });
+});
+
+describe("walk()", function () {
+  it("should visit html.elements.a.href.href_top", function () {
+    let results = Array.from(walk("html")).map((feature) => feature.path);
+    assert.ok(results.includes("html.elements.a.href.href_top"));
+  });
+
   it("should walk a single tree", function () {
     let results = Array.from(walk("api.Notification"));
     assert.strictEqual(results.length, 27);
