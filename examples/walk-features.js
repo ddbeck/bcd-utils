@@ -2,9 +2,9 @@
 
 const { walk } = require("..");
 
-for (const { path, feature } of walk()) {
-  if ("__compat" in feature) {
-    console.log(`${path} (${feature.description})`);
+for (const { path, compat } of walk()) {
+  if ("description" in compat) {
+    console.log(`${path} (${compat.description})`);
   } else {
     console.log(`${path}`);
   }
