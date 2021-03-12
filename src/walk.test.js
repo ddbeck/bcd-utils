@@ -1,4 +1,4 @@
-const assert = require('assert');
+const assert = require('assert').strict;
 
 const bcd = require('./bcd');
 const { walk } = require('./index');
@@ -23,8 +23,8 @@ describe('lowLevelWalk()', function () {
 
     const steps = Array.from(lowLevelWalk(undefined, undefined, 1));
     const paths = steps.map(step => step.path);
-    assert.strictEqual(steps.length, expectedPaths.length);
-    assert.deepStrictEqual(paths, expectedPaths);
+    assert.equal(steps.length, expectedPaths.length);
+    assert.deepEqual(paths, expectedPaths);
   });
   it('visits every point in the tree', function () {
     const paths = Array.from(lowLevelWalk()).map(step => step.path);
@@ -33,28 +33,25 @@ describe('lowLevelWalk()', function () {
 });
 
 describe('walk()', function () {
-  it('should visit html.elements.a.href.href_top', function () {
+  it('should visit deeply nested features', function () {
     let results = Array.from(walk('html')).map(feature => feature.path);
     assert.ok(results.includes('html.elements.a.href.href_top'));
   });
 
   it('should walk a single tree', function () {
     let results = Array.from(walk('api.Notification'));
-    assert.strictEqual(results.length, 27);
-    assert.strictEqual(results[0].path, 'api.Notification');
-    assert.strictEqual(results[1].path, 'api.Notification.Notification');
+    assert.equal(results.length, 27);
+    assert.equal(results[0].path, 'api.Notification');
+    assert.equal(results[1].path, 'api.Notification.Notification');
   });
 
   it('should walk multiple trees', function () {
     let results = Array.from(
       walk(['api.Notification', 'css.properties.color']),
     );
-    assert.strictEqual(results.length, 28);
-    assert.strictEqual(results[0].path, 'api.Notification');
-    assert.strictEqual(
-      results[results.length - 1].path,
-      'css.properties.color',
-    );
+    assert.equal(results.length, 28);
+    assert.equal(results[0].path, 'api.Notification');
+    assert.equal(results[results.length - 1].path, 'css.properties.color');
   });
 
   it('should yield every feature by default', function () {
@@ -63,6 +60,6 @@ describe('walk()', function () {
       .filter(line => line.includes('__compat')).length;
     const featureCountFromWalk = Array.from(walk()).length;
 
-    assert.strictEqual(featureCountFromString, featureCountFromWalk);
+    assert.equal(featureCountFromString, featureCountFromWalk);
   });
 });

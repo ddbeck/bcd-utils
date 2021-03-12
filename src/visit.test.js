@@ -1,16 +1,16 @@
-const assert = require('assert');
+const assert = require('assert').strict;
 
 const visit = require('./visit');
 const { walk } = require('./walk');
 
 describe('visit()', function () {
   it('runs the function on all features if no other entry point is specified', function () {
-    const walker = walk('html.elements.a');
+    const walker = walk();
     visit(
-      'html.elements.a',
+      undefined,
       () => true,
       visitorPath => {
-        assert.strictEqual(visitorPath, walker.next().value.path);
+        assert.equal(visitorPath, walker.next().value.path);
       },
     );
   });
