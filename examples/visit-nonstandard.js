@@ -1,12 +1,12 @@
-const { visit } = require("../src/index.js");
+const { visit } = require('../src/index.js');
 
 visit(
   undefined,
-  (path) => {
-    return path.startsWith("api.RTC");
+  path => {
+    return path.startsWith('api.RTC');
   },
   (path, feature) => {
-    const std = feature.status.standard_track ? "✅" : "❗️";
+    const std = feature.status.standard_track ? '✅' : '❗️';
     console.log(`${std} ${path}`);
-  }
+  },
 );

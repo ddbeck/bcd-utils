@@ -1,44 +1,42 @@
-const { visit, iterSupport } = require("..");
+const { visit, iterSupport } = require('..');
 
 function hasFlags(supportStatement) {
   return Array.isArray(supportStatement.flags);
 }
 
 function hasVersionRemoved(supportStatement) {
-  return "version_removed" in supportStatement;
+  return 'version_removed' in supportStatement;
 }
 
-const browserId = "firefox";
-const flagName = "dom.w3c_pointer_events.enabled";
+const browserId = 'firefox';
+const flagName = 'dom.w3c_pointer_events.enabled';
 const features = [];
 
 visit(
-  "api",
+  'api',
   (path, feature) => {
     const unremovedFlaggedStatements = iterSupport(feature, browserId)
-      .filter((statement) => !hasVersionRemoved(statement))
+      .filter(statement => !hasVersionRemoved(statement))
       .filter(hasFlags);
 
-    const hasPointerEventFlag = unremovedFlaggedStatements.filter(
-      (statement) => {
-        for (const flag of statement.flags) {
-          if (flag.name === flagName) {
-            return true;
-          }
+    const hasPointerEventFlag = unremovedFlaggedStatements.filter(statement => {
+      for (const flag of statement.flags) {
+        if (flag.name === flagName) {
+          return true;
         }
-        return false;
       }
-    );
+      return false;
+    });
 
     return hasPointerEventFlag.length > 0;
   },
-  (path) => {
+  path => {
     features.push(path);
-  }
+  },
 );
 
 console.log(
-  `The following ${features.length} features have the flag ${flagName}:`
+  `The following ${features.length} features have the flag ${flagName}:`,
 );
 for (const feat of features) {
   console.log(feat);

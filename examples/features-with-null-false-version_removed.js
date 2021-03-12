@@ -1,4 +1,4 @@
-const { visit, iterSupport } = require("../src/index.js");
+const { visit, iterSupport } = require('../src/index.js');
 
 visit(
   undefined,
@@ -12,5 +12,5 @@ visit(
     }
     return false;
   },
-  (path) => console.log(path)
+  path => console.log(path),
 );

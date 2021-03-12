@@ -1,19 +1,19 @@
-const { visit } = require("..");
+const { visit } = require('..');
 
 const results = {};
 
 const toVisit = [
-  "api",
-  "css",
-  "html",
-  "http",
-  "javascript",
-  "mathml",
-  "svg",
-  "webdriver",
-  "webextensions",
-  "xpath",
-  "xslt",
+  'api',
+  'css',
+  'html',
+  'http',
+  'javascript',
+  'mathml',
+  'svg',
+  'webdriver',
+  'webextensions',
+  'xpath',
+  'xslt',
 ];
 
 for (const key of toVisit) {
@@ -32,7 +32,7 @@ for (const key of toVisit) {
       if (feature.status && !feature.status.standard_track) {
         nonStandard++;
       }
-    }
+    },
   );
 
   results[key] = {
@@ -54,7 +54,7 @@ for (const value of Object.values(results)) {
   nonStandard += value.nonStandard;
 }
 
-results["total"] = {
+results['total'] = {
   total,
   withSpec,
   nonStandard,
@@ -62,25 +62,25 @@ results["total"] = {
   completeScore: (nonStandard + withSpec) / total,
 };
 
-const fnum = (n) =>
-  new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(n);
+const fnum = n =>
+  new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(n);
 
 const headers = [
-  "category",
-  "features",
-  "with spec URLs",
-  "non-standard",
-  "% with specs",
-  "% complete",
+  'category',
+  'features',
+  'with spec URLs',
+  'non-standard',
+  '% with specs',
+  '% complete',
 ];
 
 function printHeaders() {
-  console.log("| " + headers.join(" | ") + " |");
-  let out = "";
+  console.log('| ' + headers.join(' | ') + ' |');
+  let out = '';
   for (let index = 0; index < headers.length; index++) {
-    out += "| --- ";
+    out += '| --- ';
   }
-  out += "|";
+  out += '|';
   console.log(out);
 }
 
@@ -94,7 +94,7 @@ const e = (key, value) => {
     `${fnum(value.completeScore * 100)}%`,
   ];
 
-  console.log("| " + strings.join(" | ") + " |");
+  console.log('| ' + strings.join(' | ') + ' |');
 };
 
 printHeaders();

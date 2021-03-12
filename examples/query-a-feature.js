@@ -1,6 +1,6 @@
-const { query } = require("..");
+const { query } = require('..');
 
-console.log(format("api.Notification"));
+console.log(format('api.Notification'));
 
 function format(path) {
   const feat = query(path);
@@ -13,7 +13,7 @@ function format(path) {
     result.push(`Description: \t${feat.__compat.description}`);
   }
 
-  const children = Object.keys(feat).filter((k) => k !== "__compat");
+  const children = Object.keys(feat).filter(k => k !== '__compat');
   if (children.length) {
     result.push(`Children [${children.length}]: `);
     for (const child of children) {
@@ -21,5 +21,5 @@ function format(path) {
     }
   }
 
-  return result.join("\n");
+  return result.join('\n');
 }

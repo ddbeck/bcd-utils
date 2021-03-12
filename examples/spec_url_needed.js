@@ -1,4 +1,4 @@
-const { visit } = require("..");
+const { visit } = require('..');
 
 visit(
   undefined,
@@ -11,5 +11,5 @@ visit(
     ) {
       console.log(path);
     }
-  }
+  },
 );
