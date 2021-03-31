@@ -4,12 +4,17 @@ const query = require('./query');
 
 function* lowLevelWalk(data = bcd, path, depth = Infinity) {
   if (path !== undefined) {
-    yield {
+    const next = {
       path,
       data,
-      compat: data.__compat,
-      browser: isBrowser(data) ? data : undefined,
     };
+
+    if (isBrowser(data)) {
+      next.browser = data;
+    } else if (data.__compat !== undefined) {
+      next.compat = data.__compat;
+    }
+    yield next;
   }
 
   if (depth > 0) {
@@ -19,16 +24,16 @@ function* lowLevelWalk(data = bcd, path, depth = Infinity) {
   }
 }
 
-function* walk(entryPoints) {
+function* walk(entryPoints, data = bcd) {
   const walkers = [];
 
   if (entryPoints === undefined) {
-    walkers.push(lowLevelWalk());
+    walkers.push(lowLevelWalk(data));
   } else {
     entryPoints = Array.isArray(entryPoints) ? entryPoints : [entryPoints];
     walkers.push(
       ...entryPoints.map(entryPoint =>
-        lowLevelWalk(query(entryPoint), entryPoint),
+        lowLevelWalk(query(entryPoint, data), entryPoint),
       ),
     );
   }

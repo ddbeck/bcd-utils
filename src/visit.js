@@ -5,18 +5,26 @@ const { descendantKeys, joinPath, isFeature } = require('./walkingUtils');
 const BREAK = Symbol('break');
 const CONTINUE = Symbol('continue');
 
-function visit(entryPoint, testFn, visitorFn) {
-  const data = entryPoint === undefined ? bcd : query(entryPoint);
+function visit(visitor, options = {}) {
+  const { entryPoint, data } = options;
+  const test = options.test !== undefined ? options.test : () => true;
+
+  const tree = entryPoint === undefined ? bcd : query(entryPoint, data);
+
   let outcome;
-  if (isFeature(data) && testFn(entryPoint, data.__compat)) {
-    outcome = visitorFn(entryPoint, data.__compat);
+  if (isFeature(tree) && test(entryPoint, tree.__compat)) {
+    outcome = visitor(entryPoint, tree.__compat);
   }
   if (outcome === BREAK) {
     return outcome;
   }
   if (outcome !== CONTINUE) {
-    for (const key of descendantKeys(data)) {
-      const suboutcome = visit(joinPath(entryPoint, key), testFn, visitorFn);
+    for (const key of descendantKeys(tree)) {
+      const suboutcome = visit(visitor, {
+        entryPoint: joinPath(entryPoint, key),
+        test,
+        data,
+      });
       if (suboutcome === BREAK) {
         return suboutcome;
       }
