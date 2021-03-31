@@ -22,8 +22,6 @@ for (const key of toVisit) {
   let nonStandard = 0;
 
   visit(
-    key,
-    () => true,
     (path, feature) => {
       features++;
       if (feature.spec_url) {
@@ -32,6 +30,9 @@ for (const key of toVisit) {
       if (feature.status && !feature.status.standard_track) {
         nonStandard++;
       }
+    },
+    {
+      entryPoint: key,
     },
   );
 

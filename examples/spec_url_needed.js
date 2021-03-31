@@ -18,18 +18,21 @@ const missingSpec = new Set();
 const milestone1 = new Set();
 const milestone2 = new Set();
 
-visit(undefined, isStandardTrack, (path, compat) => {
-  standardTrack.add(path);
-  if (hasMdnUrl(compat)) {
-    milestone1.add(path);
-  } else {
-    milestone2.add(path);
-  }
+visit(
+  (path, compat) => {
+    standardTrack.add(path);
+    if (hasMdnUrl(compat)) {
+      milestone1.add(path);
+    } else {
+      milestone2.add(path);
+    }
 
-  if (missingSpecUrl(compat)) {
-    missingSpec.add(path);
-  }
-});
+    if (missingSpecUrl(compat)) {
+      missingSpec.add(path);
+    }
+  },
+  { test: isStandardTrack },
+);
 
 console.log('## Milestone 1');
 for (const path of standardTrack) {

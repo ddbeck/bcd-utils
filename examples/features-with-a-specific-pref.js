@@ -13,25 +13,29 @@ const flagName = 'dom.w3c_pointer_events.enabled';
 const features = [];
 
 visit(
-  'api',
-  (path, feature) => {
-    const unremovedFlaggedStatements = iterSupport(feature, browserId)
-      .filter(statement => !hasVersionRemoved(statement))
-      .filter(hasFlags);
-
-    const hasPointerEventFlag = unremovedFlaggedStatements.filter(statement => {
-      for (const flag of statement.flags) {
-        if (flag.name === flagName) {
-          return true;
-        }
-      }
-      return false;
-    });
-
-    return hasPointerEventFlag.length > 0;
-  },
   path => {
     features.push(path);
+  },
+  {
+    entryPoint: 'api',
+    test: (path, feature) => {
+      const unremovedFlaggedStatements = iterSupport(feature, browserId)
+        .filter(statement => !hasVersionRemoved(statement))
+        .filter(hasFlags);
+
+      const hasPointerEventFlag = unremovedFlaggedStatements.filter(
+        statement => {
+          for (const flag of statement.flags) {
+            if (flag.name === flagName) {
+              return true;
+            }
+          }
+          return false;
+        },
+      );
+
+      return hasPointerEventFlag.length > 0;
+    },
   },
 );
 

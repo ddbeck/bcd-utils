@@ -12,10 +12,12 @@ function hasFlags(compat, browser) {
 const browserId = 'safari';
 
 visit(
-  'api',
-  (path, compat) => hasFlags(compat, browserId),
   (path, compat) => {
     console.log(path);
     console.log(compat.support[browserId]);
+  },
+  {
+    entryPoint: 'api',
+    test: (path, compat) => hasFlags(compat, browserId),
   },
 );
