@@ -12,6 +12,6 @@
     "prettier": "^2.2.1"
   },
   "dependencies": {
-    "@mdn/browser-compat-data": "^5.1.0"
+    "@mdn/browser-compat-data": "^5.1.3"
   }
 }
