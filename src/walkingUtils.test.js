@@ -2,7 +2,13 @@ const assert = require('assert').strict;
 
 const bcd = require('./bcd');
 const query = require('./query');
-const { joinPath, isBrowser, isFeature } = require('./walkingUtils');
+const {
+  descendantKeys,
+  isBrowser,
+  isFeature,
+  isMeta,
+  joinPath,
+} = require('./walkingUtils');
 
 describe('joinPath()', function () {
   it('joins dotted paths to features', function () {
@@ -32,5 +38,38 @@ describe('isFeature()', function () {
 
   it('returns true for feature-like objects', function () {
     assert.ok(isFeature(query('html.elements.a')));
+  });
+});
+
+describe('isMeta()', function () {
+  it('returns true for __meta objects', function () {
+    assert.ok(isMeta(bcd.__meta));
+  });
+
+  it('returns false for browser-like objects', function () {
+    assert.equal(isMeta(bcd.browsers.chrome), false);
+  });
+
+  it('returns false for feature-like objects', function () {
+    assert.equal(isMeta(query('html.elements.a')), false);
+  });
+});
+
+describe('descendantKeys()', function () {
+  it('returns an empty array for __meta', function () {
+    assert.equal(descendantKeys(bcd.__meta).length, 0);
+  });
+
+  it('returns an empty array for browser', function () {
+    assert.equal(descendantKeys(bcd.browsers.chrome).length, 0);
+  });
+
+  it('returns descendant feature keys but not __compat', function () {
+    const keys = descendantKeys(bcd.css.properties.display);
+    assert.equal(keys.includes('__compat'), false);
+    assert.ok(keys.length > 0);
+    assert.ok(
+      keys.every(key => typeof key === 'string' || key instanceof String),
+    );
   });
 });

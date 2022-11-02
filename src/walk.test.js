@@ -7,6 +7,7 @@ const { lowLevelWalk } = require('./walk');
 describe('lowLevelWalk()', function () {
   it('visits every top-level tree', function () {
     const expectedPaths = [
+      '__meta',
       'api',
       'browsers',
       'css',
