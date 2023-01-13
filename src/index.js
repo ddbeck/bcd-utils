@@ -1,14 +1,7 @@
-const { walk, lowLevelWalk } = require('./walk');
-const iterReleases = require('./iter-releases');
-const iterSupport = require('./iter-support');
-const query = require('./query');
-const visit = require('./visit');
+import { walk, lowLevelWalk } from './walk.js';
+import iterReleases from './iter-releases.js';
+import iterSupport from './iter-support.js';
+import query from './query.js';
+import visit from './visit.js';
 
-module.exports = {
-  iterReleases,
-  iterSupport,
-  lowLevelWalk,
-  query,
-  visit,
-  walk,
-};
+export { iterReleases, iterSupport, lowLevelWalk, query, visit, walk };

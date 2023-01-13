@@ -7,4 +7,4 @@ function iterSupport(compat, browser) {
   return [{ version_added: null }];
 }
 
-module.exports = iterSupport;
+export default iterSupport;

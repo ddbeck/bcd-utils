@@ -1,4 +1,4 @@
-const { compareVersions } = require('compare-versions');
+import { compareVersions } from 'compare-versions';
 
 function* iterReleases(data) {
   const arr = [];
@@ -15,4 +15,4 @@ function* iterReleases(data) {
   yield* arr;
 }
 
-module.exports = iterReleases;
+export default iterReleases;

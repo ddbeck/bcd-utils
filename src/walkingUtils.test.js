@@ -1,14 +1,14 @@
-const assert = require('assert').strict;
+import assert from 'node:assert/strict';
 
-const bcd = require('./bcd');
-const query = require('./query');
-const {
+import bcd from '@mdn/browser-compat-data' assert { type: 'json' };
+import query from './query.js';
+import {
   descendantKeys,
   isBrowser,
   isFeature,
   isMeta,
   joinPath,
-} = require('./walkingUtils');
+} from './walkingUtils.js';
 
 describe('joinPath()', function () {
   it('joins dotted paths to features', function () {

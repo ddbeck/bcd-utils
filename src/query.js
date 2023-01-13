@@ -1,4 +1,4 @@
-const bcd = require('./bcd');
+import bcd from '@mdn/browser-compat-data' assert { type: 'json' };
 
 /**
  * Get a subtree of compat data.
@@ -23,4 +23,4 @@ function query(path, data = bcd) {
   return lookup;
 }
 
-module.exports = query;
+export default query;

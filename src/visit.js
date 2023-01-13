@@ -1,6 +1,6 @@
-const bcd = require('./bcd');
-const query = require('./query');
-const { descendantKeys, joinPath, isFeature } = require('./walkingUtils');
+import bcd from '@mdn/browser-compat-data' assert { type: 'json' };
+import query from './query.js';
+import { descendantKeys, joinPath, isFeature } from './walkingUtils.js';
 
 const BREAK = Symbol('break');
 const CONTINUE = Symbol('continue');
@@ -36,4 +36,4 @@ function visit(visitor, options = {}) {
 visit.BREAK = BREAK;
 visit.CONTINUE = CONTINUE;
 
-module.exports = visit;
+export default visit;

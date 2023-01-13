@@ -1,7 +1,7 @@
-const assert = require('assert').strict;
+import { strict as assert } from 'assert';
 
-const iterReleases = require('./iter-releases');
-const query = require('./query');
+import iterReleases from './iter-releases.js';
+import query from './query.js';
 
 describe('iterReleases()', function () {
   it('returns array of friendlier release objects', function () {

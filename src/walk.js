@@ -1,6 +1,6 @@
-const bcd = require('./bcd');
-const { isBrowser, descendantKeys, joinPath } = require('./walkingUtils');
-const query = require('./query');
+import bcd from '@mdn/browser-compat-data' assert { type: 'json' };
+import { isBrowser, descendantKeys, joinPath } from './walkingUtils.js';
+import query from './query.js';
 
 function* lowLevelWalk(data = bcd, path, depth = Infinity) {
   if (path !== undefined) {
@@ -47,4 +47,4 @@ function* walk(entryPoints, data = bcd) {
   }
 }
 
-module.exports = { walk, lowLevelWalk };
+export { walk, lowLevelWalk };

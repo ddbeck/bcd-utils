@@ -2,12 +2,13 @@
   "name": "@ddbeck/bcd-utils",
   "version": "0.1.0",
   "description": "Utilities for working with @mdn/browser-compat-data.",
-  "main": "src/index.js",
+  "type": "module",
+  "exports": "./src/index.js",
   "scripts": {
     "test": "mocha 'src/**.test.js'"
   },
   "devDependencies": {
-    "eslint": "^7.20.0",
+    "eslint": "^8.31.0",
     "mocha": "^8.3.0",
     "prettier": "^2.2.1"
   },

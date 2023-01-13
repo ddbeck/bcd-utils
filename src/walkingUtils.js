@@ -41,10 +41,4 @@ function descendantKeys(data) {
   return Object.keys(data);
 }
 
-module.exports = {
-  descendantKeys,
-  isBrowser,
-  isFeature,
-  isMeta,
-  joinPath,
-};
+export { descendantKeys, isBrowser, isFeature, isMeta, joinPath };
