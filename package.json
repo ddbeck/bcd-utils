@@ -7,7 +7,7 @@
     "test": "mocha 'src/**.test.js'"
   },
   "devDependencies": {
-    "eslint": "^7.20.0",
+    "eslint": "^8.31.0",
     "mocha": "^8.3.0",
     "prettier": "^2.2.1"
   },
