@@ -1,6 +1,20 @@
 import { compareVersions } from 'compare-versions';
 
-function* iterReleases(data) {
+interface Browser {
+  name: String;
+  type: String;
+  releases: { [key: string]: Release };
+}
+
+interface Release {
+  release_date: String;
+  release_notes: String;
+  status: String;
+  engine: String;
+  engine_version: String;
+}
+
+function* iterReleases(data: Browser) {
   const arr = [];
 
   for (const [key, value] of Object.entries(data)) {
