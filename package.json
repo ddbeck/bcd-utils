@@ -1,6 +1,6 @@
 {
   "name": "@ddbeck/bcd-utils",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Utilities for working with @mdn/browser-compat-data.",
   "type": "module",
   "exports": "./src/index.js",
