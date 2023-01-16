@@ -1,4 +1,4 @@
-import { strict as assert } from 'assert';
+import { strict as assert } from 'node:assert';
 
 import iterReleases from './iter-releases.js';
 import query from './query.js';
