@@ -5,7 +5,9 @@
   "type": "module",
   "exports": "./src/index.js",
   "scripts": {
-    "test": "mocha 'src/**.test.js'"
+    "test": "mocha 'src/**.test.js' && npm run format:check",
+    "format:check": "prettier --check .",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "eslint": "^8.32.0",
