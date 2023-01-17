@@ -1,4 +1,4 @@
-const { iterSupport, visit } = require('../src/index.js');
+import { iterSupport, visit } from '..';
 
 function hasFlags(compat, browser) {
   for (const statement of iterSupport(compat, browser)) {

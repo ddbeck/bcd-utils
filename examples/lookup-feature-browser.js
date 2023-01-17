@@ -1,6 +1,6 @@
-const { query } = require('../src');
+import { query } from '..';
 
-const { argv } = require('process');
+import { argv } from 'node:process';
 
 const [feature, browser] = argv.slice(2);
 

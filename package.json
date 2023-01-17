@@ -3,12 +3,14 @@
   "version": "0.2.0",
   "description": "Utilities for working with @mdn/browser-compat-data.",
   "type": "module",
-  "exports": "./src/index.js",
+  "exports": "./build/index.js",
   "scripts": {
-    "test": "mocha 'build/**.test.js' && npm run format:check",
+    "test": "mocha 'build/**.test.js' && npm run lint && npm run format:check",
+    "lint": "eslint .",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "build": "tsc --resolveJsonModule"
+    "build": "tsc --resolveJsonModule",
+    "prepare": "npm run build"
   },
   "devDependencies": {
     "eslint": "^8.36.0",
@@ -17,6 +19,11 @@
     "@tsconfig/recommended": "^1.0.2",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.48.2",
+    "eslint": "^8.32.0",
+    "mocha": "^10.2.0",
+    "prettier": "^2.8.3",
     "typescript": "^4.9.4"
   },
   "dependencies": {

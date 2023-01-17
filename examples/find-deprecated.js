@@ -1,6 +1,6 @@
 // Walk over every feature, print its identifier, and its description (if it has one)
 
-const { walk } = require('..');
+import { walk } from '..';
 
 function log(path, compat) {
   if ('description' in compat) {

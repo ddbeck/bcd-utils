@@ -1,4 +1,4 @@
-const { visit } = require('..');
+import { visit } from '..';
 
 function hasMdnUrl(compat) {
   return compat.mdn_url !== undefined;

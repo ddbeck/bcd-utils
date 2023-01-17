@@ -1,4 +1,4 @@
-const { query } = require('..');
+import { query } from '..';
 
 console.log(format('api.Notification'));
 

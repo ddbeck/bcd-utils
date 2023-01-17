@@ -1,4 +1,4 @@
-const { visit } = require('../src/index.js');
+import { visit } from '..';
 
 visit(
   function visitor(path, feature) {

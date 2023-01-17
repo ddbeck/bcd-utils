@@ -1,4 +1,4 @@
-const { visit, iterSupport } = require('../src/index.js');
+import { visit, iterSupport } from '..';
 
 visit(path => console.log(path), {
   test: (path, feature) => {
