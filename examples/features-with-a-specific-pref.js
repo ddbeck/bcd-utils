@@ -1,4 +1,4 @@
-const { visit, iterSupport } = require('..');
+import { visit, iterSupport } from '..';
 
 function hasFlags(supportStatement) {
   return Array.isArray(supportStatement.flags);

@@ -1,17 +1,17 @@
 import { compareVersions } from 'compare-versions';
 
 interface Browser {
-  name: String;
-  type: String;
+  name: string;
+  type: string;
   releases: { [key: string]: Release };
 }
 
 interface Release {
-  release_date: String;
-  release_notes: String;
-  status: String;
-  engine: String;
-  engine_version: String;
+  release_date: string;
+  release_notes: string;
+  status: string;
+  engine: string;
+  engine_version: string;
 }
 
 function* iterReleases(data: Browser) {

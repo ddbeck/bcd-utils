@@ -1,6 +1,6 @@
-const { query, iterReleases } = require('../src');
+import { query, iterReleases } from '..';
 
-const { argv } = require('process');
+import { argv } from 'node:process';
 
 const [browser, version] = argv.slice(2);
 

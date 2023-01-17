@@ -1,4 +1,4 @@
-const { visit } = require('..');
+import { visit } from '..';
 
 const results = {};
 
