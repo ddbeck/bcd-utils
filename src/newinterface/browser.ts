@@ -13,6 +13,7 @@ export function browser(key: BrowserName): Browser {
 export class Browser {
   id: BrowserName;
   data: BrowserStatement; // Underlying BCD browser object
+  _releases: Release[];
 
   // Pass through BCD values where convenient
   name: string;
@@ -27,12 +28,33 @@ export class Browser {
     this.name = name;
     this.type = type;
     this.preview_name = preview_name;
+
+    this._releases = [];
+    for (const version of Object.keys(this.data.releases)) {
+      this._releases.push(new Release(this, version));
+    }
+
+    this._releases.sort((a, b) => {
+      // TODO: Use regular valueOf comparison
+      const padDotZero = (str: string): string =>
+        str.includes('.') ? str : `${str}.0`;
+      const toInt = (str: string): number => Number.parseInt(str, 10);
+      const [aMajor, aMinor] = padDotZero(a.version).split('.').map(toInt);
+      const [bMajor, bMinor] = padDotZero(b.version).split('.').map(toInt);
+
+      if (aMajor - bMajor < 0) {
+        return -1;
+      }
+      if (aMajor - bMajor > 0) {
+        return 1;
+      }
+      return aMinor - bMinor;
+    });
   }
 
   toArray(options?: { includePreReleases: boolean }): Release[] {
     const releases: Release[] = [];
-    for (const version of Object.keys(this.data.releases)) {
-      const rel = new Release(this, version);
+    for (const rel of this._releases) {
       if (rel.isPrerelease() && !options?.includePreReleases) {
         continue;
       }
@@ -88,6 +110,13 @@ export class Release {
       : Infinity;
     this.status = this.data.status;
     this.name = browser.name;
+  }
+
+  static isRelease(object: unknown): object is Release {
+    if (object instanceof Release) {
+      return true;
+    }
+    return false;
   }
 
   isPrerelease(): boolean {
