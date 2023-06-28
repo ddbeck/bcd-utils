@@ -30,6 +30,6 @@
     "compare-versions": "^5.0.3"
   },
   "peerDependencies": {
-    "@mdn/browser-compat-data": "^5.2.51"
+    "@mdn/browser-compat-data": "^5.3.0"
   }
 }
