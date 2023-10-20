@@ -53,3 +53,14 @@ describe('browser()', function () {
     );
   });
 });
+
+describe('Release', function () {
+  it('#compare()', function () {
+    const r100 = browser('firefox').releaseFromVersion('100');
+    const r50 = browser('firefox').releaseFromVersion('50');
+
+    assert.ok(r100.compare(r50) === 1);
+    assert.ok(r50.compare(r100) === -1);
+    assert.ok(r50.compare(r50) === 0);
+  });
+});

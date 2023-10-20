@@ -67,8 +67,28 @@ export class Browser {
     return `[Browser: ${this.name}]`;
   }
 
-  releaseAt(index: number): Release | undefined {
-    return this.toArray().at(index);
+  releaseAt(index: number): Release {
+    const release = this.toArray().at(index);
+    if (release === undefined) {
+      throw RangeError(
+        `${this.toString()} has no release at position ${index}`,
+      );
+    }
+    return release;
+  }
+
+  releaseFromVersion(versionSpecifier: string) {
+    const version = versionSpecifier.startsWith('≤')
+      ? versionSpecifier.slice(1)
+      : versionSpecifier;
+
+    const release = this._releases.find(r => r.version === version);
+    if (release === undefined) {
+      throw RangeError(
+        `${this.toString()} has no release with version ${version}`,
+      );
+    }
+    return release;
   }
 
   // releaseOn(date: string): Release | undefined {
@@ -136,4 +156,16 @@ export class Release {
   // supports(feature: Feature): boolean {
   //   throw Error('Not implemented');
   // }
+
+  compare(b: Release) {
+    // TODO: check that browsers are the same
+
+    if (this.release_date < b.release_date) {
+      return -1;
+    }
+    if (b.release_date < this.release_date) {
+      return 1;
+    }
+    return 0;
+  }
 }

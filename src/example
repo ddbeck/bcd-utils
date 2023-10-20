@@ -1,0 +1,14 @@
+feature('css.properties.border-color').isSupported({
+  byBrowsers: ['chrome', 'firefox', 'safari'],
+});
+
+feature('css.properties.border-color').isSupported({
+  byBrowsers: ['chrome', 'firefox', 'safari'],
+  since: '2022-01-01',
+});
+
+feature('css.properties.border-color')
+  .isSupported({
+    byVersions: [{ chrome: '100' }, { firefox: '100' }, { safari: '16' }],
+  })
+  .notes();

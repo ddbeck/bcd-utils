@@ -6,6 +6,7 @@ import {
 
 import { Browser, Release } from './browser.js';
 import query from '../query.js';
+import { RealSupportStatement, statement } from './statement.js';
 
 export function feature(id: string): Feature {
   return new Feature(id);
@@ -39,6 +40,35 @@ export class Feature {
 
   // But BCD is very nuanced, so we'll need to offer some options, particularly around partial implementations.
   // supportedBy(releases: Release[], options: supportedByOptions): supported;
+  // TODO: is release in the range of statements represented by this.supportStatements(release.browser.id)?
+  // const statements = this.supportStatements(release.browser.id);
+  // TODO: find a "version_added statement"
+  // }
+  supportedBy(release: Release): boolean {
+    const statements = this.supportStatements(release);
+    console.log(`Checking ${release}: ${JSON.stringify(statements)}`);
+
+    const reals = statements.filter(
+      (s): s is RealSupportStatement => s instanceof RealSupportStatement,
+    );
+    const opens = reals.filter(
+      s => s.version_added !== false && s.version_removed === false,
+    );
+    const unqualified = opens.filter(
+      s =>
+        'alternative_name' in s.data === false &&
+        'prefix' in s.data === false &&
+        'flags' in s.data === false &&
+        'partial_implementation' in s.data == false &&
+        s.data.version_added !== 'preview',
+    );
+    for (const statement of unqualified) {
+      if (statement.toReleases(release.browser).includes(release)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   // Partials and notes will probably require some interrogation. Likewise, some
   // consumers might want a more complex resolution to the question of multiple
@@ -67,9 +97,9 @@ export class Feature {
 
     const support = this.data.__compat?.support[browserKey] ?? [];
     if (Array.isArray(support)) {
-      return support;
+      return support.map(s => statement(s));
     }
-    return [support];
+    return [statement(support)];
   }
 
   // Not in-scope for this proposal, but things to consider for the future:
