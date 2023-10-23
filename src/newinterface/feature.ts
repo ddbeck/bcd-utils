@@ -46,7 +46,7 @@ export class Feature {
   // }
   supportedBy(release: Release): boolean {
     const statements = this.supportStatements(release);
-    console.log(`Checking ${release}: ${JSON.stringify(statements)}`);
+    // console.log(`Checking ${release}: ${JSON.stringify(statements)}`);
 
     const reals = statements.filter(
       (s): s is RealSupportStatement => s instanceof RealSupportStatement,
@@ -63,10 +63,13 @@ export class Feature {
         s.data.version_added !== 'preview',
     );
     for (const statement of unqualified) {
-      if (statement.toReleases(release.browser).includes(release)) {
+      if (statement.includes(release)) {
+        // console.log('✅');
         return true;
       }
+      // console.log(statement.toReleases(release.browser).map(r => r.toString()));
     }
+    // console.log('❌');
     return false;
   }
 

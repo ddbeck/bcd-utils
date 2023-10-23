@@ -68,12 +68,17 @@ export class RealSupportStatement extends SupportStatement {
     if (this.version_added === false) {
       return false;
     }
-    return this.toReleases(release.browser).includes(release);
+    for (const rel of this.toReleases(release.browser)) {
+      if (release.compare(rel) === 0) {
+        return true;
+      }
+    }
+    return false;
   }
 
   // TODO: figure out a way to annotate support statements with browser information on construction
   toReleases(browser: Browser): Release[] {
-    console.log(`toReleases: called for ${JSON.stringify(this.data)}`);
+    // console.log(`toReleases: called for ${JSON.stringify(this.data)}`);
     if (this.version_added === false) {
       // console.log(`toReleases: version added is false, no releases`);
       return [];
@@ -91,13 +96,13 @@ export class RealSupportStatement extends SupportStatement {
 
     const result = [];
     for (const r of browser.toArray({ includePreReleases: true })) {
-      console.log(
-        `comparing ${r.toString()} to ${startRelease.toString()} (${r.compare(
-          startRelease,
-        )}) and ${endRelease.toString()} (${r.compare(endRelease)})`,
-      );
-      if (0 <= r.compare(startRelease) && r.compare(endRelease) >= 0) {
-        console.log(`accepted ${r.toString()}`);
+      // console.log(
+      //   `comparing ${r.toString()} to ${startRelease.toString()} (${r.compare(
+      //     startRelease,
+      //   )}) and ${endRelease.toString()} (${r.compare(endRelease)})`,
+      // );
+      if (-1 < r.compare(startRelease) && 1 > r.compare(endRelease)) {
+        // console.log(`accepted ${r.toString()}`);
         result.push(r);
       }
     }

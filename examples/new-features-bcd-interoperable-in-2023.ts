@@ -37,9 +37,9 @@ const headings = [
 console.log(headings);
 
 for (const { path } of walk()) {
-  if (path !== 'api.CSSCounterStyleRule') {
-    continue;
-  }
+  // if (path !== 'api.CSSCounterStyleRule') {
+  //   continue;
+  // }
   const f = feature(path);
 
   const result = {
@@ -49,11 +49,12 @@ for (const { path } of walk()) {
     firefox_supported_at_start: supportedBy(f, fx.releaseFromVersion('108')),
     safari_supported_at_start: supportedBy(f, sa.releaseFromVersion('16.2')),
     chrome_supported_at_end: supportedBy(f, cr.releaseFromVersion('118')),
-    edge_supported_at_end: supportedBy(f, ed.releaseFromVersion('118')),
+    // edge_supported_at_end: supportedBy(f, ed.releaseFromVersion('118')),
+    edge_supported_at_end: supportedBy(f, ed.releaseFromVersion('117')),
     firefox_supported_at_end: supportedBy(f, fx.releaseFromVersion('118')),
     safari_supported_at_end: supportedBy(f, sa.releaseFromVersion('17')),
   };
-  console.log(result);
+  // console.log(result);
 
   const unsupported_by_one_at_start = [
     result.chrome_supported_at_start,

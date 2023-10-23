@@ -161,11 +161,14 @@ export class Release {
     // TODO: check that browsers are the same
 
     if (this.release_date < b.release_date) {
+      // this release is older than release b (e.g., verison 1 is before version 10)
       return -1;
     }
     if (b.release_date < this.release_date) {
+      // this release is newer than release b (e.g., version 10 is after version 1)
       return 1;
     }
+    // these releases are the same
     return 0;
   }
 }
